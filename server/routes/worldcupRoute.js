@@ -15,7 +15,16 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-
+  const id = req.params.id
+  db.getGroup(id)
+    .then(worldcup => {
+      res.json(worldcup)
+    })
+    .catch(err => {
+    // eslint-disable-next-line no-console
+      console.error(err)
+      res.status(500).send('Unable to read from database')
+    })
 })
 
 router.put('/', (req, res) => {
